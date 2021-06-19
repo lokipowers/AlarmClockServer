@@ -70,24 +70,29 @@ def stopAlarm():
 @app.route('/enable-led')
 def enableLED():
   setLEDStatus('True')
+  return jsonify(True)
 
 @app.route('/disabled-lef')
 def disableLED():
   setLEDStatus('False')
+  return jsonify(True)
 
 # Rumble
 @app.route('/enable-rumble')
 def enableRumble():
   setRumbleStatus('True')
+  return jsonify(True)
 
 @app.route('/disabled-rumble')
 def disableRumble():
   setRumbleStatus('False')
+  return jsonify(True)
 
 # Snooze
 @app.route('/set-snooze-duration', methods=['GET'])
 def saveSnoozeDuration():
   setSnoozeDuration(request.args.get('snooze_duration'))
+  return jsonify(True)
 
 
 # SCREEN BRIGHTNESS
