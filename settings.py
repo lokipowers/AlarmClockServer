@@ -41,3 +41,24 @@ def stopAlarm():
   # updateAlarmConfig('alarm_running', 'False')
   setAlarmStatus('False')
   return jsonify(True)
+
+
+@app.route('/enable-led')
+def enableLED():
+  setLEDStatus('True')
+
+@app.route('/disabled-lef')
+def disableLED():
+  setLEDStatus('False')
+
+@app.route('/enable-rumble')
+def enableRumble():
+  setRumbleStatus('True')
+
+@app.route('/disabled-rumble')
+def disableRumble():
+  setRumbleStatus('False')
+
+@app.route('/set-snooze-duration', methods=['GET'])
+def saveSnoozeDuration():
+  setSnoozeDuration(request.args.get('snooze_duration'))
