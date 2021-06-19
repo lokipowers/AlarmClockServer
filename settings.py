@@ -1,3 +1,4 @@
+from flask.json import jsonify
 from db import *
 
 from flask import Flask, request, jsonifys
@@ -42,7 +43,7 @@ def stopAlarm():
   setAlarmStatus('False')
   return jsonify(True)
 
-
+# LED
 @app.route('/enable-led')
 def enableLED():
   setLEDStatus('True')
@@ -51,6 +52,7 @@ def enableLED():
 def disableLED():
   setLEDStatus('False')
 
+# Rumble
 @app.route('/enable-rumble')
 def enableRumble():
   setRumbleStatus('True')
@@ -59,6 +61,32 @@ def enableRumble():
 def disableRumble():
   setRumbleStatus('False')
 
+# Snooze
 @app.route('/set-snooze-duration', methods=['GET'])
 def saveSnoozeDuration():
   setSnoozeDuration(request.args.get('snooze_duration'))
+
+
+# SCREEN BRIGHTNESS
+@app.route('/set-screen-brightness', methods=['GET'])
+def change_brightness():
+  # Change screen brightness
+  brightness = request.args.get('brightness')
+  subprocess.check_output('sudo bash -c "echo ' + brightness + ' > /sys/class/backlight/rpi_backlight/brightness"', shell=True)
+  return jsonify(request.args.get('brightness'))
+
+ 
+@app.route('/get-screen-brightness', methods=['GET'])
+def get_brightness():
+  with open('/sys/class/backlight/rpi_backlight/brightness', 'r') as b:
+    brightness = b.read()
+  return brightness
+
+
+# All Settings
+@app.route('/get-settings')
+def getSettings():
+  cursor = db.cursor()
+  sql = "SELECT * FROM configs"
+  cursor.execute(sql)
+  return jsonify(cursor.fetchAll())
