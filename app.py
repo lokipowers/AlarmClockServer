@@ -117,7 +117,7 @@ def getSettings():
   cursor = db.cursor()
   sql = "SELECT * FROM configs"
   cursor.execute(sql)
-  return jsonify(cursor.fetchAll())
+  return jsonify(cursor.fetchall())
 
 
 
