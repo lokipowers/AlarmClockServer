@@ -72,7 +72,7 @@ def enableLED():
   setLEDStatus('True')
   return jsonify(True)
 
-@app.route('/disabled-lef')
+@app.route('/disabled-led')
 def disableLED():
   setLEDStatus('False')
   return jsonify(True)
