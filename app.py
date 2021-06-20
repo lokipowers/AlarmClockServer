@@ -123,7 +123,7 @@ def getSettings():
 
 @app.route('/get-alarms')
 def fetchAlarms():
-  return jsonify(getAlarms())
+  return getAlarms()
 
 @app.route('/create-alarm', methods=['GET'])
 def makeAlarm():
