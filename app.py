@@ -57,7 +57,7 @@ def startAlarm():
   saveSetting('alarm_running', 'True')
   response = subprocess.check_output(['sudo', 'bash', 'runAlarm.sh'])
   #response = subprocess.check_output(['sudo', 'python', 'Rumble.py'])
-  return jsonify(response)
+  return jsonify(true)
 
 
 @app.route('/stop-alarm')
