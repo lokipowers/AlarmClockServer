@@ -9,6 +9,7 @@ import time
 #import mysql.connector
 from db import *
 from settings import *
+from alarms import *
 
 LEDSTRIP = Led()
 
@@ -120,6 +121,26 @@ def getSettings():
   return jsonify(cursor.fetchall())
 
 
+@app.route('/get-alarms')
+def fetchAlarms():
+  return jsonify(getAlarms())
+
+@app.route('/create-alarm', methods=['GET'])
+def makeAlarm():
+  createAlarm(request.args.get('alarm'))
+  return jsonify(getAlarms())
+
+@app.route('/update-alarm/<id>', methods=['GET'])
+def saveAlarm(id):
+  updateAlarm(id, request.args.get('alarm'))
+
+@app.route('/set-alarm-status/<id>', methods=['GET'])
+def changeAlarmStatus(id):
+  setAlarmStatus(id, request.args.get('status'))
+
+@app.route('/delete-alarm/<id>', methods=['GET'])
+def removeAlarm(id):
+  deleteAlarm(id)
 
 if __name__ == '__main__':
   app.run()
