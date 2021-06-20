@@ -24,12 +24,12 @@ def deleteAlarm(id):
 
 def getAlarms():
   cursor = db.cursor()
-  sql = "SELECT * FROM alarms WHERE deleted_at IS NULL"
+  sql = "SELECT time, date, repeat_days, enabled FROM alarms WHERE deleted_at IS NULL"
   cursor.execute(sql)
   return cursor.fetchall()
 
 def getAlarm(id):
   cursor = db.cursor()
-  sql = "SELECT * FROM alarms WHERE id = " + id
+  sql = "SELECT time, date, repeat_days, enabled FROM alarms WHERE id = " + id
   cursor.execute(sql)
   return cursor.fetchall()
