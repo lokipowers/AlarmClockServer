@@ -54,7 +54,7 @@ def screen_power():
 def startAlarm():
   #LEDSTRIP.startShow()
   # updateAlarmConfig('alarm_running', 'True')
-  setAlarmStatus('True')
+  saveSetting('alarm_running', 'True')
   response = subprocess.check_output(['sudo', 'bash', 'runAlarm.sh'])
   #response = subprocess.check_output(['sudo', 'python', 'Rumble.py'])
   return jsonify(response)
@@ -64,7 +64,7 @@ def startAlarm():
 def stopAlarm():
   #LEDSTRIP.stopShow()
   # updateAlarmConfig('alarm_running', 'False')
-  setAlarmStatus('False')
+  saveSetting('alarm_running', 'False')
   return jsonify(True)
 
 # LED
